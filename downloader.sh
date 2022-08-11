@@ -1,0 +1,9 @@
+python twitter_downloader.py --username matteosalvinimi --number-of-tweets 3200 --out-file data/salvini.json
+python twitter_downloader.py --username GiorgiaMeloni --number-of-tweets 3200 --out-file data/meloni.json
+python twitter_downloader.py --username berlusconi --number-of-tweets 3200 --out-file data/berlusconi.json
+python twitter_downloader.py --username matteorenzi --number-of-tweets 3200 --out-file data/renzi.json
+python twitter_downloader.py --username luigidimaio --number-of-tweets 3200 --out-file data/dimaio.json
+python twitter_downloader.py --username GiuseppeConteIT --number-of-tweets 3200 --out-file data/conte.json
+python twitter_downloader.py --username CarloCalenda --number-of-tweets 3200 --out-file data/calenda.json
+python twitter_downloader.py --username emmabonino --number-of-tweets 3200 --out-file data/bonino.json
+python twitter_downloader.py --username EnricoLetta --number-of-tweets 3200 --out-file data/letta.json
