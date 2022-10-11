@@ -131,4 +131,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-data/
+*data/
+.idea/
+export_bearer*
+.DS*
