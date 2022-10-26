@@ -4,16 +4,16 @@ from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
 from nltk.stem import SnowballStemmer
 
-# class OurStemmer():
+class OurStemmer():
 
-#     def __init__(self, custom_tokens: list[str]):
-#         self.custom_tokens = custom_tokens
-#         self.stemmer = SnowballStemmer("italian")
+    def __init__(self, custom_tokens: list[str]):
+        self.custom_tokens = custom_tokens
+        self.stemmer = SnowballStemmer("italian")
 
-#     def stem(self, token):
-#         if token in self.custom_tokens:
-#             return token
-#         return self.stemmer.stem(token)
+    def stem(self, token):
+        if token in self.custom_tokens:
+            return token
+        return self.stemmer.stem(token)
 
 class DataPreprocesser():
 
@@ -24,7 +24,7 @@ class DataPreprocesser():
         self.stopwords = set(stopwords.words('italian'))
         self.tokenizer = TweetTokenizer()
         # TODO how to read externally?
-        # self.stemmer = OurStemmer(open("words.txt", "r").read().split('\n'))
+        self.stemmer = OurStemmer(open("words.txt", "r").read().split('\n'))
 
     def is_stopword(self, word: str):
         return word in self.stopwords
@@ -41,7 +41,7 @@ class DataPreprocesser():
 
     # fixme here tweet is a list? not a string?
     def stem_tweet(self, tweet: list):
-        return False#[self.stemmer.stem(word) for word in tweet] 
+        return [self.stemmer.stem(word) for word in tweet] 
 
     # fixme where to put POLITICIANS
     def stem_data(self, data: dict):
