@@ -50,5 +50,6 @@ class DataPreprocesser():
         POLITICIANS = data.keys()
         return {politician: [self.stem_tweet(tweet) for tweet in data[politician]] for politician in POLITICIANS}
 
-    def preprocess_data(self, data: dict):
-        return self.stem_data(self.tokenize_data(data))
+    def preprocess_data(self, data: dict, stem = True):
+        tokenized_data = self.tokenize_data(data)
+        return self.stem_data(tokenized_data) if stem else tokenized_data
