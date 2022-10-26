@@ -29,10 +29,10 @@ class DataPreprocesser():
         self.stemmer = OurStemmer(open("words.txt", "r").read().split('\n'))
 
     def is_stopword(self, word: str):
-        word in self.stopwords
+        return word in self.stopwords
 
     def is_punctuation(self, word: str):
-        word in self.italian_punctuation
+        return word in self.italian_punctuation
 
     def tokenize_tweet(self, tweet: str):
         return [word for word in self.tokenizer.tokenize(tweet) if not self.is_punctuation(word) and not self.is_stopword(word)] 
