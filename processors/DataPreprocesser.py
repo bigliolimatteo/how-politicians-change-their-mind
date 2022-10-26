@@ -1,0 +1,54 @@
+import nltk
+from string import punctuation
+from nltk.corpus import stopwords
+from nltk.tokenize import TweetTokenizer
+from nltk.stem import SnowballStemmer
+
+
+
+class OurStemmer():
+
+    def __init__(self, custom_tokens: list[str]):
+        self.custom_tokens = custom_tokens
+        self.stemmer = SnowballStemmer("italian")
+
+    def stem(self, token):
+        if token in self.custom_tokens:
+            return token
+        return self.stemmer.stem(token)
+
+class DataPreprocesser():
+
+    # TODO add readibility
+    def __init__(self):
+        nltk.download('stopwords')
+        self.italian_punctuation = punctuation + "’"
+        self.stopwords = set(stopwords.words('italian'))
+        self.tokenizer = TweetTokenizer()
+        # TODO how to read externally?
+        self.stemmer = OurStemmer(open("words.txt", "r").read().split('\n'))
+
+    def is_stopword(self, word: str):
+        word in self.stopwords
+
+    def is_punctuation(self, word: str):
+        word in self.italian_punctuation
+
+    def single_tokenize(self, tweet: str):
+        return [word for word in self.tokenizer.tokenize(tweet) if not self.is_punctuation(word) and not self.is_stopword(word)] 
+
+    def tokenize_tweet(self, data: dict):
+        POLITICIANS = data.keys()
+        return {politician: [self.single_tokenize(tweet) for tweet in data[politician]] for politician in POLITICIANS}
+
+    # fixme here tweet is a list? not a string?
+    def stem_tweet(self, tweet: list):
+        return [self.stemmer.stem(word) for word in tweet] 
+
+    # fixme where to put POLITICIANS
+    def stem_data(self, data: dict):
+        POLITICIANS = data.keys()
+        return {politician: [self.stem_tweet(tweet) for tweet in data[politician]] for politician in POLITICIANS}
+
+    def preprocess_data(self, data: dict):
+        return self.stem_data(self.tokenize_data(data))
