@@ -1,4 +1,4 @@
-python downloader/twitter_downloader.py  --username NFratoianni --number-of-tweets 3200 --out-file data/fratoianna.json
+python downloader/twitter_downloader.py  --username NFratoianni --number-of-tweets 3200 --out-file data/fratoianni.json
 python downloader/twitter_downloader.py  --username dariofrance --number-of-tweets 3200 --out-file data/franceschini.json
 python downloader/twitter_downloader.py  --username pbersani --number-of-tweets 3200 --out-file data/bersani.json
 python downloader/twitter_downloader.py  --username Ignazio_LaRussa --number-of-tweets 3200 --out-file data/larussa.json
