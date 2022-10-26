@@ -34,12 +34,12 @@ class DataPreprocesser():
     def is_punctuation(self, word: str):
         word in self.italian_punctuation
 
-    def single_tokenize(self, tweet: str):
+    def tokenize_tweet(self, tweet: str):
         return [word for word in self.tokenizer.tokenize(tweet) if not self.is_punctuation(word) and not self.is_stopword(word)] 
 
-    def tokenize_tweet(self, data: dict):
+    def tokenize_data(self, data: dict):
         POLITICIANS = data.keys()
-        return {politician: [self.single_tokenize(tweet) for tweet in data[politician]] for politician in POLITICIANS}
+        return {politician: [self.tokenize_tweet(tweet) for tweet in data[politician]] for politician in POLITICIANS}
 
     # fixme here tweet is a list? not a string?
     def stem_tweet(self, tweet: list):
