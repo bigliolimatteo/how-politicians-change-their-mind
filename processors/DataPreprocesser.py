@@ -6,7 +6,7 @@ from nltk.stem import SnowballStemmer
 
 class OurStemmer():
 
-    def __init__(self, custom_tokens: list[str]):
+    def __init__(self, custom_tokens):
         self.custom_tokens = custom_tokens
         self.stemmer = SnowballStemmer("italian")
 
