@@ -25,6 +25,9 @@ class DataPreprocesser():
         self.tokenizer = TweetTokenizer()
         # TODO how to read externally?
         self.stemmer = OurStemmer(open("words.txt", "r").read().split('\n'))
+    
+    def remove_emptytweets(self, data):
+        return list(filter(lambda a: a != [], data))
 
     def is_stopword(self, word: str):
         return word in self.stopwords
@@ -33,11 +36,11 @@ class DataPreprocesser():
         return word in self.italian_punctuation
 
     def tokenize_tweet(self, tweet: str):
-        return [word for word in self.tokenizer.tokenize(tweet) if not self.is_punctuation(word) and not self.is_stopword(word)] 
+        return [word for word in self.tokenizer.tokenize(tweet) if not self.is_punctuation(word) and not self.is_stopword(word)]
 
     def tokenize_data(self, data: dict):
         POLITICIANS = data.keys()
-        return {politician: [self.tokenize_tweet(tweet) for tweet in data[politician]] for politician in POLITICIANS}
+        return {politician: self.remove_emptytweets([self.tokenize_tweet(tweet) for tweet in data[politician]]) for politician in POLITICIANS}
 
     # fixme here tweet is a list? not a string?
     def stem_tweet(self, tweet: list):
@@ -46,7 +49,7 @@ class DataPreprocesser():
     # fixme where to put POLITICIANS
     def stem_data(self, data: dict):
         POLITICIANS = data.keys()
-        return {politician: [self.stem_tweet(tweet) for tweet in data[politician]] for politician in POLITICIANS}
+        return {politician: self.remove_emptytweets([self.stem_tweet(tweet) for tweet in data[politician]]) for politician in POLITICIANS}
 
     def preprocess_data(self, data: dict, stem = True):
         tokenized_data = self.tokenize_data(data)

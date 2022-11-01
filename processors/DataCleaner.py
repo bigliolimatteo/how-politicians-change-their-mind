@@ -41,15 +41,7 @@ def join_tweets(data):
             i -= 1
     return new_list
 
-def remove_emptytweets(data):
-    while True:
-        if [] in data:
-            data.remove([])
-        else:
-            break
-    return data
-
 def clean_data(data: dict):
     POLITICIANS = list(data.keys())
     filtered_data = {politician: list(filter(None, [preclean_tweet(tweet) for tweet in data[politician]])) for politician in POLITICIANS}
-    return {politician: remove_emptytweets(join_tweets(filtered_data[politician])) for politician in POLITICIANS}
+    return {politician: join_tweets(filtered_data[politician]) for politician in POLITICIANS}
