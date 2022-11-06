@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+import pandas as pd
 
 def clean_data(data, start_date = datetime(2022,7,22), end_date = datetime(2022,9,25)):
 
