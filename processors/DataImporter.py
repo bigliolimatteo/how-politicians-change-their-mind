@@ -2,7 +2,7 @@ import json
 import os
 import pandas as pd
 
-RELEVANT_FIELDS = ['id', 'politician', 'created_at', 'text', 'public_metrics.retweet_count',
+RELEVANT_FIELDS = ['id', 'politician', 'created_at', 'text', "referenced_tweets", "conversation_id", 'public_metrics.retweet_count',
        'public_metrics.reply_count', 'public_metrics.like_count', 'public_metrics.quote_count']
 
 def read_data(input_directory: str):
@@ -20,4 +20,3 @@ def read_data(input_directory: str):
             raise Exception(f"Input file {filename} has a non supported format.")
 
     return pd.concat(dfs)
-    
