@@ -36,6 +36,7 @@ class DataPreprocesser():
 
     def tokenize_data(self, data):
         tokenized_data = data.copy()
+        tokenized_data["original_text"] = data["text"]
         tokenized_data["text"] = data["text"].map(lambda text: self.tokenize_tweet(text))
         return tokenized_data
 
@@ -44,7 +45,7 @@ class DataPreprocesser():
 
     def stem_data(self, data):
         stemmed_data = data.copy()
-        stemmed_data["text"] = data["text"].map(lambda text: self.stem_tweet(text))
+        stemmed_data["text"] = data["tokenized_text"].map(lambda text: self.stem_tweet(text))
         # Drop empty and duplicated tweets
         unique_stemmed_data = stemmed_data.loc[stemmed_data.astype(str).drop_duplicates("text").index]
         return unique_stemmed_data[unique_stemmed_data["text"].astype(str) != "[]"]
