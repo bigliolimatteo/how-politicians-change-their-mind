@@ -44,7 +44,8 @@ class DataPreprocesser():
         return [self.stemmer.stem(word) for word in tweet] 
 
     def stem_data(self, data):
-        stemmed_data = data.copy().reset_index(drop=True)
+        stemmed_data = data.copy()
+        stemmed_data.reset_index(drop=True, inplace=True)
         stemmed_data["text"] = data["text"].map(lambda text: self.stem_tweet(text))
         # Drop empty and duplicated tweets
         unique_stemmed_data = stemmed_data.loc[stemmed_data.astype(str).drop_duplicates("text").index]
