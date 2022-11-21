@@ -19,7 +19,7 @@ class DataPreprocesser():
 
     def __init__(self):
         nltk.download('stopwords')
-        self.italian_punctuation = punctuation + "’"
+        self.italian_punctuation = punctuation + "’”“"
         self.stopwords = set(stopwords.words('italian') + stopwords.words('english'))
         self.tokenizer = TweetTokenizer()
         # TODO how to read externally?
