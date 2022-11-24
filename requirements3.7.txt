@@ -1,0 +1,8 @@
+pandas
+hdbscan
+nltk
+matplotlib
+wordcloud
+umap-learn
+scikit-learn
+sentence-transformers
