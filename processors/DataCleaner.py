@@ -20,10 +20,6 @@ def clean_data(data, start_date = datetime(2022,7,22), end_date = datetime(2022,
     return non_retweet_date_filtered_data.reset_index(drop=True)
 
 def join_threads(data):
-    tweets_thread_condition = (data["text"].str.contains(r'[0-9]/[0-9]')) & (data["referenced_tweets"].astype(str).str.contains("replied_to"))
-
-    cleaned_data_no_threads = data.drop(data[tweets_thread_condition].index)
-    cleaned_data_just_threads = data[tweets_thread_condition]
 
     aggregation_dict = {"id": "first",
                 "public_metrics.retweet_count" : "sum",
@@ -34,6 +30,4 @@ def join_threads(data):
                 "referenced_tweets": "first",
                 'text': lambda x: ','.join(x)}
 
-    joined_threads = cleaned_data_just_threads.groupby(['politician', "conversation_id"]).agg(aggregation_dict).reset_index()
-
-    return pd.concat([cleaned_data_no_threads, joined_threads])
+    return data.groupby(['politician', "conversation_id"]).agg(aggregation_dict).reset_index()
