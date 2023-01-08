@@ -22,7 +22,7 @@ def clean_data(data, start_date = datetime(2022,7,22), end_date = datetime(2022,
 def join_threads(data):
     # The only problem here could be cases in which a politician replies to himself without the goal of creating a thread and 
     # inserts two tokens like r'[0-9]/[0-9]' in all the tweets of the same conversation ID
-    tweets_thread_condition = data["text"].str.contains(r'[0-9]/[0-9]')
+    tweets_thread_condition = data["text"].str.contains(r'[0-9]+/[0-9]+')
 
     cleaned_data_no_threads = data.drop(data[tweets_thread_condition].index)
     cleaned_data_just_threads = data[tweets_thread_condition]
