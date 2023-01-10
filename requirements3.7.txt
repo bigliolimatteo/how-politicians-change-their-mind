@@ -6,3 +6,7 @@ wordcloud
 umap-learn
 scikit-learn
 sentence-transformers
+bertopic
+gensim
+pyLDAvis
+nbformat
