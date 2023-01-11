@@ -10,3 +10,4 @@ bertopic
 gensim
 pyLDAvis
 nbformat
+seaborn
