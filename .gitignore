@@ -137,3 +137,4 @@ export_bearer*
 .vscode
 TBD
 lemmatization-it.txt
+*.png
