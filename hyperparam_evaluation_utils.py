@@ -3,6 +3,7 @@ from tqdm import tqdm
 from tqdm import notebook
 from sklearn import metrics
 import numpy as np
+import pandas as pd
 
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import make_scorer
