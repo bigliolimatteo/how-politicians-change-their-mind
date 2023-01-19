@@ -94,3 +94,22 @@ def plot_topic_tfidf(tweets, cluster_labels, n_words_per_topic = 5, only_first_n
         axs[math.floor(k/4), k%4].invert_yaxis()
 
     plt.show()
+
+def plot_lda_model_topics(lda_model, only_first_n = None):
+
+    n_topics = only_first_n if only_first_n is not None and only_first_n < lda_model.get_topics().shape[0] else lda_model.get_topics().shape[0]
+
+    # Utils for representation purposes
+    n_rows = math.ceil(n_topics/3)
+    n_cols = 3
+    _, axs = plt.subplots(n_rows, n_cols, figsize=(20, n_topics))
+    colors = plt.rcParams["axes.prop_cycle"]()
+
+    for k in range(0, n_topics):
+        labels, scores = zip(*lda_model.show_topic(k))
+        y_pos = np.arange(len(labels))
+        c = next(colors)["color"]
+        axs[math.floor(k/3), k%3].barh(labels, scores, align='center', color=c)
+        axs[math.floor(k/3), k%3].invert_yaxis()
+
+    plt.show()
