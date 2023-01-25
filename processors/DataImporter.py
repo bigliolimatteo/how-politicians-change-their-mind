@@ -17,6 +17,6 @@ def read_data(input_directory: str):
             
             dfs.append(tmp_df[RELEVANT_FIELDS])
         else: 
-            raise Exception(f"Input file {filename} has a non supported format.")
+            print(f"Input file {filename} has a non supported format, will be skipped")
 
     return pd.concat(dfs)
